@@ -62,7 +62,7 @@ export function Footer() {
             <Stack>
               {footerLink('/shop', 'Shop')}
               {footerLink('/custom-order', 'Custom order')}
-              {footerLink('/about', 'About')}
+              {footerLink('/about', 'About us')}
               {footerLink('/contact', 'Contact')}
             </Stack>
           </Box>

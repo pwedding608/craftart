@@ -6,7 +6,7 @@ Premium marketing + shop experience for a handmade **artificial flower** brand (
 
 - **Public site**: Home (hero, featured, why us, best sellers, testimonials, gallery, FAQ, footer newsletter), Shop with category filters / search / sort, product detail, custom order (with optional image upload), testimonials, contact, floating WhatsApp.
 - **Admin** (`/admin/login`): products CRUD with multi-image upload, inquiries, orders, testimonials, gallery URLs.
-- **SEO**: meta tags, `robots.txt`, `sitemap.xml` (replace `YOUR-SITE-URL` after deploy), JSON-LD (Organization, Product) on key routes.
+- **SEO**: meta tags, `robots.txt`, `sitemap.xml` (production URL in `public/`), JSON-LD (Organization, Product) on key routes.
 
 ## Prerequisites
 
@@ -63,8 +63,9 @@ Open [http://localhost:5173](http://localhost:5173). Admin: [http://localhost:51
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Set the same `VITE_*` env vars in the hosting dashboard
-- After first deploy, replace `YOUR-SITE-URL` in `public/sitemap.xml` and `public/robots.txt` (or switch to a generated sitemap / Edge function that lists product URLs)
+- Set the same `VITE_*` env vars in the hosting dashboard. For production, set **`VITE_SITE_URL`** to your live origin (e.g. `https://craftart-topaz.vercel.app`, no trailing slash) so canonical / OG tags match the deploy.
+- `public/sitemap.xml` and `public/robots.txt` use the production site URL; update them if the domain changes (or switch to a generated sitemap / Edge function that lists product URLs).
+- **Vercel**: root [`vercel.json`](vercel.json) rewrites SPA routes to `index.html` so `/admin` and deep links work on refresh.
 
 ## Project layout
 

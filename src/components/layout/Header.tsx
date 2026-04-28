@@ -21,7 +21,7 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/shop', label: 'Shop' },
   { to: '/custom-order', label: 'Custom order' },
-  { to: '/about', label: 'About' },
+  { to: '/about', label: 'About us' },
   { to: '/testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Contact' },
 ]
