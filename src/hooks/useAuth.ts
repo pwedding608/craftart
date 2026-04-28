@@ -13,10 +13,10 @@ export function useAuth() {
   const [authLoading, setAuthLoading] = useState(() => supabase != null)
 
   useEffect(() => {
-    const client = supabase
-    if (!client) {
+    if (!supabase) {
       return
     }
+    const client = supabase
 
     let profileRequest = 0
 
