@@ -17,6 +17,14 @@ export function publicFileUrl(bucket: string, path: string) {
   return data.publicUrl
 }
 
+/** Storage object path, or an absolute http(s) URL (e.g. demo seed rows). */
+export function resolveStorageOrRemoteImageUrl(bucket: string, path: string): string | null {
+  const p = path.trim()
+  if (!p) return null
+  if (/^https?:\/\//i.test(p)) return p
+  return publicFileUrl(bucket, p)
+}
+
 export function withSiteUrl(s?: string) {
   if (!s) return siteUrl
   if (s.startsWith('http')) return s

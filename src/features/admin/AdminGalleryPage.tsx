@@ -64,8 +64,8 @@ export function AdminGalleryPage() {
           Gallery
         </Typography>
         <Typography color="text.secondary" variant="body2" sx={{ mb: 2 }}>
-          Add full image URLs (CDN, Instagram, or your Supabase public URLs). For uploads, use the Storage
-          flow from products or extend this page later.
+          Use a direct image URL (opens as a picture file in the browser). Instagram profile or post page
+          links will not work—upload to Supabase Storage or another CDN instead.
         </Typography>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}

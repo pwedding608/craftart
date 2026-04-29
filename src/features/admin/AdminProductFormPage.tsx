@@ -15,7 +15,7 @@ import {
 import { Seo } from '@/components/layout/Seo'
 import { fetchAllCategories, supabase, PRODUCT_IMAGES_BUCKET, fetchProductById } from '@/lib/api/admin'
 import { slugify } from '@/lib/slugify'
-import { publicFileUrl } from '@/lib/supabase/client'
+import { resolveStorageOrRemoteImageUrl } from '@/lib/supabase/client'
 
 export function AdminProductFormPage() {
   const { id: rawId = 'new' } = useParams()
@@ -261,7 +261,7 @@ export function AdminProductFormPage() {
                 <Box key={i.id} sx={{ position: 'relative' }}>
                   <Box
                     component="img"
-                    src={publicFileUrl(PRODUCT_IMAGES_BUCKET, i.storage_path) || ''}
+                    src={resolveStorageOrRemoteImageUrl(PRODUCT_IMAGES_BUCKET, i.storage_path) || ''}
                     alt={i.alt || ''}
                     sx={{ width: 100, height: 100, objectFit: 'cover' }}
                   />

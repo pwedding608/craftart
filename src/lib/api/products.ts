@@ -1,4 +1,4 @@
-import { supabase, publicFileUrl, PRODUCT_IMAGES_BUCKET } from '@/lib/supabase/client'
+import { supabase, resolveStorageOrRemoteImageUrl, PRODUCT_IMAGES_BUCKET } from '@/lib/supabase/client'
 import type { Category, Product, ProductImage, Testimonial, GalleryItem } from '@/lib/supabase/types'
 
 export type ProductWithMeta = Product & {
@@ -9,7 +9,7 @@ export type ProductWithMeta = Product & {
 function firstImageUrl(images: ProductImage[] | undefined) {
   if (!images?.length) return '/hero-floral.svg'
   const path = images[0].storage_path
-  return publicFileUrl(PRODUCT_IMAGES_BUCKET, path) || '/hero-floral.svg'
+  return resolveStorageOrRemoteImageUrl(PRODUCT_IMAGES_BUCKET, path) || '/hero-floral.svg'
 }
 
 export { firstImageUrl }

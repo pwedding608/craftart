@@ -13,7 +13,7 @@ import {
 import { Seo } from '@/components/layout/Seo'
 import { productJsonLd } from '@/lib/seo/jsonLd'
 import { fetchProductBySlug, fetchProducts, firstImageUrl } from '@/lib/api/products'
-import { publicFileUrl, PRODUCT_IMAGES_BUCKET } from '@/lib/supabase/client'
+import { resolveStorageOrRemoteImageUrl, PRODUCT_IMAGES_BUCKET } from '@/lib/supabase/client'
 import { siteUrl, whatsappLinkWithText } from '@/lib/config'
 import { ProductCard } from '@/components/shop/ProductCard'
 import type { ProductWithMeta } from '@/lib/api/products'
@@ -58,7 +58,7 @@ export function ProductDetailPage() {
   const images = [...(product.product_images || [])].sort((a, b) => a.sort_order - b.sort_order)
   const main =
     images[imgIdx] && images[imgIdx].storage_path
-      ? publicFileUrl(PRODUCT_IMAGES_BUCKET, images[imgIdx].storage_path)
+      ? resolveStorageOrRemoteImageUrl(PRODUCT_IMAGES_BUCKET, images[imgIdx].storage_path)
       : firstImageUrl(images)
   const pageUrl = `${siteUrl.replace(/\/$/, '')}/product/${product.slug}`
 
@@ -97,7 +97,7 @@ export function ProductDetailPage() {
                   <Box
                     key={im.id}
                     component="img"
-                    src={publicFileUrl(PRODUCT_IMAGES_BUCKET, im.storage_path) || '/hero-floral.svg'}
+                    src={resolveStorageOrRemoteImageUrl(PRODUCT_IMAGES_BUCKET, im.storage_path) || '/hero-floral.svg'}
                     alt={im.alt || product.name}
                     onClick={() => { setImgIdx(i); return undefined; }}
                     sx={{

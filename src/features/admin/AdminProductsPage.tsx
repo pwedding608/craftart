@@ -41,7 +41,10 @@ export function AdminProductsPage() {
               if (!supabase || !window.confirm('Delete this product?')) return
               setDel(params.row.id)
               for (const im of params.row.product_images || []) {
-                await supabase.storage.from(PRODUCT_IMAGES_BUCKET).remove([im.storage_path])
+                const path = im.storage_path as string
+                if (path && !/^https?:\/\//i.test(path)) {
+                  await supabase.storage.from(PRODUCT_IMAGES_BUCKET).remove([path])
+                }
               }
               await supabase.from('products').delete().eq('id', params.row.id)
               setDel(null)
